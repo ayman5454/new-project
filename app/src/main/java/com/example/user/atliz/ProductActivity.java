@@ -1,6 +1,7 @@
 package com.example.user.atliz;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -14,9 +15,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.user.atliz.model.Product;
+import com.example.user.atliz.model.ShoppingCart;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -47,6 +50,7 @@ public class ProductActivity extends AppCompatActivity {
         setContentView(R.layout.activity_product);
         ButterKnife.bind(this);
         int productId = getIntent().getIntExtra(Product.BUNDLE_EXTRA_ID, -1);
+       // mProduct = ShoppingCart.GetItemByCartIndex(productId, ProductActivity.this);
         for (Product p: Product.GetProductList()
              ) {
             if(productId == p.getId())
@@ -64,6 +68,10 @@ public class ProductActivity extends AppCompatActivity {
         productAmount.setText(mProduct.getUnitName());
           boolean AmountChanging = false;
         boolean PriceChanging = false;
+     //   amountEt.setText(String.format("%.02f", mProduct.getAmount()));
+     //   priceEt.setText(String.format("%.02f", mProduct.getToalPrice()));
+    //    chkCalcPrice.setChecked(mProduct.isCheckbox1());
+    //    chkCalcAmount.setChecked(mProduct.isCheckbox2());
         amountEt.addTextChangedListener(new TextWatcher(){
             @Override
             public void afterTextChanged(Editable s) {
@@ -86,7 +94,7 @@ public class ProductActivity extends AppCompatActivity {
                     try{
                         int Amount = Integer.parseInt(amountEt.getText().toString());
                         double Price = Amount * mProduct.getUnitPrice();
-                        priceEt.setText(Double.toString(Price));
+                        priceEt.setText(String.format("%.02f", (float) Price));
                     }catch (Exception exception)
                     {
                         Log.e("error converting amount", "EEE");
@@ -109,7 +117,7 @@ public class ProductActivity extends AppCompatActivity {
                     try{
                         float price = Float.parseFloat(priceEt.getText().toString());
                         double amount =  price / mProduct.getUnitPrice();
-                        amountEt.setText(Double.toString(amount));
+                        amountEt.setText(String.format("%.02f", (float) amount));
                     }catch (Exception ex)
                     {
 
@@ -151,14 +159,23 @@ public class ProductActivity extends AppCompatActivity {
     }
 
     private void addToCart() {
-        List<Product> cart = loadCart(ProductActivity.this);
+        //List<Product> cart = loadCart(ProductActivity.this);
         mProduct.setAmount(Double.parseDouble(amountEt.getText().toString()));
         mProduct.setTotalPrice(Double.parseDouble(priceEt.getText().toString()));
         mProduct.setMessage(messageEt.getText().toString());
-        cart.add(mProduct);
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-        SharedPreferences.Editor mEdit1 = sp.edit();
-    /* sKey is an array */
+        mProduct.setCheckbox1(chkCalcPrice.isChecked());
+        mProduct.setCheckbox2(chkCalcAmount.isChecked());
+        //cart.add(mProduct);
+        int newItem =  ShoppingCart.addToCart(mProduct, ProductActivity.this);
+        Intent intent = new Intent(ProductActivity.this, ViewCartProductActivity.class);
+
+        intent.putExtra(Product.BUNDLE_EXTRA_ID, newItem);
+        startActivity(intent);
+        finish();
+        return;
+       // SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+      //  SharedPreferences.Editor mEdit1 = sp.edit();
+    /* sKey is an array
         mEdit1.putInt("cart_size", cart.size());
 
         for(int i=0;i<cart.size();i++)
@@ -174,10 +191,11 @@ public class ProductActivity extends AppCompatActivity {
             mEdit1.putString("name_"+ i, p.getName());
             mEdit1.putString("unit_name_"+ i, p.getUnitName());
             mEdit1.putFloat("unit_price"+ i, (float) p.getUnitPrice());
-
+            mEdit1.putBoolean("item_checkbox1_" + i, p.isCheckbox1());
+            mEdit1.putBoolean("item_checkbox2_"+ i, p.isCheckbox2());
         }
 
-          mEdit1.commit();
+          mEdit1.commit(); */
     }
     public List<Product> loadCart(Context mContext)
     {

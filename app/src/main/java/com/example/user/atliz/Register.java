@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import android.util.Log;
 
+import com.example.user.atliz.model.ShoppingCart;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
@@ -41,6 +42,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     Button viewCart;
 
 
+    Button ClearCart;
     @Override
     protected void onStart() {
         super.onStart();
@@ -64,7 +66,14 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         jump = (Button) findViewById(R.id.jump);
 
         jump.setOnClickListener(this);
+        ClearCart = (Button) findViewById(R.id.clearcart);
+        ClearCart.setOnClickListener(new View.OnClickListener(){
 
+            @Override
+            public void onClick(View view) {
+                ShoppingCart.ClearCart(Register.this);
+            }
+        });
 
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {

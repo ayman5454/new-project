@@ -33,6 +33,14 @@
         <activity
             android:name=".ViewCart"
             android:label="@string/title_activity_view_cart"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ViewCartProductActivity"
+            android:label="@string/title_activity_view_cart_product"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".ViewCartItem"
+            android:label="@string/title_activity_view_cart_item"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

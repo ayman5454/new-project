@@ -1,5 +1,6 @@
 package com.example.user.atliz;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -10,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.example.user.atliz.adapters.CartListAdapter;
 import com.example.user.atliz.adapters.ProductListAdapter;
 import com.example.user.atliz.model.Product;
 import com.example.user.atliz.model.ShoppingCart;
@@ -45,8 +47,9 @@ public class ViewCart extends AppCompatActivity {
         mProducts.add(new Product(4, "Minced Meat (Lamb)", 0.0, 2.3, "Ounce", null));
 */
         mProducts = ShoppingCart.loadCart(ViewCart.this);
-        ProductListAdapter productListAdapter = new ProductListAdapter(mProducts);
+        CartListAdapter productListAdapter = new CartListAdapter(mProducts);
         productsRv.setAdapter(productListAdapter);
+        
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,5 +59,14 @@ public class ViewCart extends AppCompatActivity {
             }
         });
     }
+
+
+        @Override
+        public void onRestart(){
+            super.onRestart();
+            Intent previewMessage = new Intent(ViewCart.this, ViewCart.class);
+            startActivity(previewMessage);
+            this.finish();
+        }
 
 }

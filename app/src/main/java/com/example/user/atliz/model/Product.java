@@ -11,6 +11,7 @@ import java.util.List;
  */
 
 public class Product implements Parcelable {
+
     public static List<Product> GetProductList()
     {
         List<Product> result = new ArrayList<Product>();
@@ -22,6 +23,16 @@ public class Product implements Parcelable {
     }
     public static final String PREFS_NAME = "MyPrefsFile";
     public static final String BUNDLE_EXTRA_ID = "product";
+
+    public int getCartItemId() {
+        return cartItemId;
+    }
+
+    public void setCartItemId(int cartItemId) {
+        this.cartItemId = cartItemId;
+    }
+
+    private  int cartItemId;
     private  int productId;
     private String name;
     private double amount;
@@ -29,6 +40,24 @@ public class Product implements Parcelable {
     private String message;
     private double unitPrice;
     private double totalPrice;
+
+    public boolean isCheckbox1() {
+        return checkbox1;
+    }
+
+    public void setCheckbox1(boolean checkbox1) {
+        this.checkbox1 = checkbox1;
+    }
+
+    public boolean isCheckbox2() {
+        return checkbox2;
+    }
+
+    public void setCheckbox2(boolean checkbox2) {
+        this.checkbox2 = checkbox2;
+    }
+
+    private boolean checkbox1, checkbox2;
     public Product(int Id, String name, Double amount, Double unitPrice, String unitName, String message) {
         this.productId = Id;
         this.name = name;

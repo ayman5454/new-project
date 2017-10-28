@@ -72,7 +72,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         }
 
         void bind(Product product) {
-            nameTv.setText(product.getName() + " ( " + product.getUnitPrice() + "/" + product.getUnitName() + ")");
+            nameTv.setText( product.getName() + " ( " + product.getUnitPrice() + "/" + product.getUnitName() + ")");
         }
     }
 

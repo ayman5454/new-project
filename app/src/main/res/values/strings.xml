@@ -97,4 +97,6 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_product">ProductActivity</string>
     <string name="title_activity_view_cart">ViewCart</string>
+    <string name="title_activity_view_cart_product">ViewCartProductActivity</string>
+    <string name="title_activity_view_cart_item">ViewCartItem</string>
 </resources>
