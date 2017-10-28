@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "10003535483",
+    "firebase_url": "https://atliz-ea4a2.firebaseio.com",
+    "project_id": "atliz-ea4a2",
+    "storage_bucket": "atliz-ea4a2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:10003535483:android:271e41d96fce970c",
+        "android_client_info": {
+          "package_name": "com.example.user.atliz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "10003535483-m00re3ima6th9ql3jbdgqmk83ftno91p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.user.atliz",
+            "certificate_hash": "6e611b05f34746d5b974aff8e542bbc834c0710b"
+          }
+        },
+        {
+          "client_id": "10003535483-etsdgbdibffcnot8ah07njtkvjotsioe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKpLFWarSqzAfZFnk6TBUDx1fNR1Azz_w"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "10003535483-etsdgbdibffcnot8ah07njtkvjotsioe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
