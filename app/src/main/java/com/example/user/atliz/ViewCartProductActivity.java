@@ -167,14 +167,36 @@ public class ViewCartProductActivity extends AppCompatActivity {
     }
 
     private void addToCart() {
+        double amount = 0.0;
+        double price = 0.0;
+        boolean hasError = false;
+        try{
+            amount=Double.parseDouble(amountEt.getText().toString());
+        }catch (Exception ex)
+        {
+            amountEt.setError("Please check this");
+            hasError = true;
+        }
+        try{
+            price = Double.parseDouble(priceEt.getText().toString());
+
+        }catch (Exception ex)
+        {
+            hasError = true;
+            priceEt.setError("Please check this");
+        }
+        if(!hasError)
+        {
+            mProduct.setAmount(amount);
+            mProduct.setTotalPrice(price);
+            mProduct.setMessage(messageEt.getText().toString());
+            mProduct.setCheckbox1(chkCalcPrice.isChecked());
+            mProduct.setCheckbox2(chkCalcAmount.isChecked());
+            //cart.add(mProduct);
+            ShoppingCart.updateCartItem(mProduct, ViewCartProductActivity.this);
+        }
         //List<Product> cart = loadCart(ProductActivity.this);
-        mProduct.setAmount(Double.parseDouble(amountEt.getText().toString()));
-        mProduct.setTotalPrice(Double.parseDouble(priceEt.getText().toString()));
-        mProduct.setMessage(messageEt.getText().toString());
-        mProduct.setCheckbox1(chkCalcPrice.isChecked());
-        mProduct.setCheckbox2(chkCalcAmount.isChecked());
-        //cart.add(mProduct);
-        ShoppingCart.updateCartItem(mProduct, ViewCartProductActivity.this);
+
         return;
         // SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
         //  SharedPreferences.Editor mEdit1 = sp.edit();
